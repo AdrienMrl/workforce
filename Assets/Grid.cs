@@ -10,10 +10,15 @@ public class GridObject {
   public Tile root;
   public Type type;
   public GameObject gameObject;
+  protected GameObject asset;
 
   public GridObject(Tile root, Type type) {
     this.type = type;
     this.root = root;
+  }
+
+  virtual public GameObject getAsset() {
+    return asset;
   }
 }
 

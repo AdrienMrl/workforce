@@ -2,11 +2,15 @@ using UnityEngine;
 
 public class GameRender: MonoBehaviour {
 
-  public GameObject floorTile;
   static public int TILE_SIZE = 1;
 
-  public GameObject createObject(int x, int y) {
-    GameObject sprite = Instantiate(floorTile, new Vector3(x * TILE_SIZE, y * TILE_SIZE, 0), Quaternion.identity);
+  public GameObject createObject(GridObject obj) {
+    int x = obj.root.x;
+    int y = obj.root.y;
+    GameObject asset = obj.getAsset();
+    GameObject sprite = Instantiate(asset);
+    float size = sprite.GetComponent<Renderer>().bounds.size.x;
+    sprite.transform.position = new Vector3(x * size, y * size, 0);
     return sprite;
   }
 
@@ -15,8 +19,7 @@ public class GameRender: MonoBehaviour {
     Grid grid = Engine.instance().grid;
 
     foreach (GridObject obj in grid.objects) {
-      print(obj.root);
-      obj.gameObject = createObject(obj.root.x, obj.root.y);
+      obj.gameObject = createObject(obj);
     }
   }
 }
