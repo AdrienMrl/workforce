@@ -52,4 +52,8 @@ public class Grid {
       objects.Add(new FloorObject(t));
     }
   }
+
+  public static Vector3 toWorldPosition(int x, int y) {
+    return new Vector3(x * GameRender.TILE_SIZE, y * GameRender.TILE_SIZE, y);
+  }
 }
