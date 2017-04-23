@@ -1,16 +1,18 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class GameRender: MonoBehaviour {
 
   static public float TILE_SIZE;
 
+  public void Start() {
+    TILE_SIZE = Useful.findAsset("Grass1").GetComponent<Renderer>().bounds.size.x;
+  }
+
   public GameObject createObject(GridObject obj) {
-    int x = obj.root.x;
-    int y = obj.root.y;
     GameObject asset = obj.getAsset();
     GameObject sprite = Instantiate(asset);
-    TILE_SIZE = sprite.GetComponent<Renderer>().bounds.size.x;
-    sprite.transform.position = Grid.toWorldPosition(x, y);
+    sprite.transform.position = Grid.toWorldPosition(obj.root.position);
     return sprite;
   }
 
@@ -18,8 +20,9 @@ public class GameRender: MonoBehaviour {
 
     Grid grid = Engine.instance().grid;
 
-    foreach (GridObject obj in grid.objects) {
-      obj.gameObject = createObject(obj);
+    foreach (KeyValuePair<System.Type, List<GridObject>> entry in grid.objectsMap) {
+      foreach (GridObject obj in entry.Value)
+        obj.instantiate();
     }
   }
 }

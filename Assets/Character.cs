@@ -2,31 +2,46 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Character : MonoBehaviour {
+public class Character: MonoBehaviour, IMachine {
 
-	public float speed = 3;
+	public float speed;
+	public int cash;
+	public Vector2 gridPosition;
 
 	private Vector3 targetOld, targetCurrent;
 	private float elapsedSinceLastTurn = 0;
 	private float turningTime = 1;
 
+	StateMachine machine = new StateMachine();
+
+	public IEnumerator idle() {
+		yield return new WaitForSeconds(1);
+		doChop();
+	}
+
+	void doChop() {
+		GridObject tree = Engine.instance().grid.findCloseObject(gridPosition, typeof(TreeObject));
+		tree.locked++;
+		moveTo(tree.root.position);
+	}
+
 	void Start () {
 		targetOld = transform.position;
 		targetCurrent = transform.position;
-		InvokeRepeating("zéroblabla", 1, 2);
+		cash = Random.Range(300, 10000);
+		speed = Random.Range(0.4f, 2f);
+		machine.run(this, this);
+		gridPosition = new Vector2(0, 0);
+		Vector3 newpos = transform.position;
+		newpos.z -= 2f;
+		transform.position = newpos;
 	}
 
-	void zéroblabla() {
-		int x = Random.Range(0, 30);
-		int y = Random.Range(0, 30);
-		moveTo(x, y);
-	}
-
-	void moveTo(int x, int y) {
+	void moveTo(Vector2 position) {
 
 		targetOld = targetCurrent;
-		targetCurrent = Grid.toWorldPosition(x, y);
-		targetCurrent.z -= 1.5f;
+		targetCurrent = Grid.toWorldPosition(position);
+		targetCurrent.z -= 2f;
 		elapsedSinceLastTurn = 0;
 	}
 
