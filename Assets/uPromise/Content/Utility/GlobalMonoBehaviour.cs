@@ -11,7 +11,7 @@ public class GlobalMonoBehaviour : Singleton<GlobalMonoBehaviour>
 	//	{
 	//		if (_instance == null)
 	//		{
-	//			Debug.Log("GlobalMonoBehaviour.Instance_get - Create New Instance.");
+//;
 	//			_instance = new GameObject("__Global", typeof(GlobalMonoBehaviour)).GetComponent<GlobalMonoBehaviour>();
 	//			_instance.gameObject.hideFlags = HideFlags.HideAndDontSave;
 	//		}
@@ -23,7 +23,7 @@ public class GlobalMonoBehaviour : Singleton<GlobalMonoBehaviour>
 	//{
 	//	if (_instance != null)
 	//	{
-	//		Debug.Log("GlobalMonoBehaviour.Awake - Create New Instance.");
+//;
 	//		Destroy(gameObject);
 	//		return;
 	//	}
@@ -54,12 +54,12 @@ public class GlobalMonoBehaviour : Singleton<GlobalMonoBehaviour>
 
 	public void Initialize()
 	{
-		Debug.Log("Initializing...");
+;
 	}
 
 	public void Shutdown()
 	{
-		Debug.Log("Shutting down...");
+;
 	}
 	
 }

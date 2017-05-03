@@ -7,7 +7,7 @@ public class GridObject {
     floor
   }
   public int width = 1, height = 1;
-  public float zOffset = 1f;
+  public Vector3 offset = new Vector3(0, 0, 1);
   public Tile root;
   public Type type;
   public GameObject gameObject;
@@ -28,7 +28,7 @@ public class GridObject {
 
     gameObject = UnityEngine.GameObject.Instantiate(getAsset());
     Vector3 position = Grid.toWorldPosition(root.position);
-    position.z -= zOffset;
+    position += offset;
     gameObject.transform.position = position;
   }
 }

@@ -8,19 +8,28 @@ class Plant: GridObject {
   public float initialGrow = 0.1f;
   public float grown;
   public float chopTime = 4f;
+  public enum Breed {
+    tree,
+    fir
+  }
+  public Breed breed;
 
-  public Plant(Tile root): base(root, Type.floor) {
-    zOffset = 1.9f;
-    grown = initialGrow;
+  public Plant(Tile root, Breed breed): base(root, GridObject.Type.floor) {
+    offset.z = -1.9f;
+    grown = 0.8f;
+    this.breed = breed;
   }
 
   public Promise chop() {
-    Debug.Log("chop!");
-    return Useful.wait(chopTime).Then(x => chopped());
+    return Useful.wait(chopTime); //.Then(x => chopped());
   }
 
-  public void chopped() {
+  public Promise chopped() {
     grown = initialGrow;
-    Debug.Log("plat chopped");
+    UnityEngine.GameObject.Destroy(gameObject);
+    instantiate();
+    Deferred d = new Deferred();
+    d.Resolve();
+    return d.Promise;
   }
 }

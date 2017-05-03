@@ -22,12 +22,17 @@ public class Character: MonoBehaviour {
 
 	public Promise doChop() {
 
-
+		print("let's chop");
 		TreeObject tree =  Engine.instance().grid.findCloseObject(gridPosition, typeof(TreeObject)) as TreeObject;
 		tree.locked++;
 		return moveTo(tree.root.position)
-			.Then(x => tree.chop());
-	}
+			.Then(x => tree.chop())
+			.Then(x => {
+				print("foobar");
+				tree.locked--;
+				doChop();
+				});
+			}
 
 	void Start () {
 		targetOld = transform.position;

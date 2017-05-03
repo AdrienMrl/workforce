@@ -9,6 +9,6 @@ class FloorObject: GridObject {
   }
 
   public FloorObject(Tile root): base(root, Type.floor) {
-    zOffset = 0;
+    offset.z = 0;
   }
 }

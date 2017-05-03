@@ -50,11 +50,11 @@ namespace uPromise
 
 			while (count != promises.Length && masterDeferred.State == DeferredState.Pending)
 			{
-				//Debug.Log(string.Format("UntilCoroutine Iterate! MasterDeferState={0}", masterDeferred.State));
+;
 				yield return new WaitForSeconds(0.1f);
 			}
 
-			//Debug.Log(string.Format("All_Coroutine Complete ; Count={0} ; ArgsLength={1} ; MasterDeferredState={2} ; count != args.Length={3} ; masterDeferred.State == PromiseState.Pending={4}", count, promises.Length, masterDeferred.State, count != promises.Length, masterDeferred.State == DeferredState.Pending));
+;
 			if (masterDeferred.State == DeferredState.Pending)
 				masterDeferred.Resolve(args);
 		}

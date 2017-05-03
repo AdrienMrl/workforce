@@ -67,7 +67,7 @@ namespace uPromise
 			}
 
 			if (!isHandled)
-				Debug.LogWarning("Deferred.OnFail<TFail> - Fail invoked and no one handled it.");
+      {}
 		}
 
 		protected void OnProgress(object arg)
@@ -154,7 +154,7 @@ namespace uPromise
 		{
 			if (State != DeferredState.Pending)
 			{
-				Debug.LogWarning("Deferred.Resolve - Deferred is not in the pending state.");
+;
 				return;
 			}
 
@@ -185,7 +185,7 @@ namespace uPromise
 		{
 			if (State != DeferredState.Pending)
 			{
-				Debug.LogWarning("Deferred.Reject - Deferred is not in the pending state.");
+;
 				return;
 			}
 
@@ -198,7 +198,7 @@ namespace uPromise
 		{
 			if (State != DeferredState.Pending)
 			{
-				Debug.LogWarning("Deferred.Notify - Deferred is not in the pending state.");
+;
 				return;
 			}
 
@@ -232,7 +232,7 @@ namespace uPromise
 			}
 			catch (Exception ex)
 			{
-				Debug.LogError(string.Format("Deferred.HandleDeferred - EXCEPTION! ex={0}", ex));
+;
 				OnFail(ex);
 				// Exit and it should never be marked as done.
 				return;
